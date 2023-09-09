@@ -1,15 +1,24 @@
 default:
   image: node:16.16.0
 
-deploy_preview:
-  stage: deploy
-  except:
-    - master
+stages:
+  - install
+  - deploy
+
+install:
+  stage: install
+  image: python:3.9
   script:
     - python -m venv venv
     - source venv/bin/activate
     - python -m pip install --upgrade pip
     - pip install --disable-pip-version-check --target . werkzeug==1.0.1
+
+deploy_preview:
+  stage: deploy
+  except:
+    - master
+  script:
     - npm install --global vercel
     - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
     - vercel build --token=$VERCEL_TOKEN
@@ -20,10 +29,6 @@ deploy_production:
   only:
     - master
   script:
-    - python -m venv venv
-    - source venv/bin/activate
-    - python -m pip install --upgrade pip
-    - pip install --disable-pip-version-check --target . werkzeug==1.0.1
     - npm install --global vercel
     - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
     - vercel build --prod --token=$VERCEL_TOKEN
