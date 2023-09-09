@@ -158,3 +158,4 @@ infoumkm/migrations/*
 pendanaan/migrations/*
 profil/migrations/*
 users/migrations/*
+.vercel
