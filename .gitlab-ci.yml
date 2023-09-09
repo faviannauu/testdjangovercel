@@ -1,19 +1,11 @@
 default:
   image: node:16.16.0
 
-stages:
-  - deploy
-
-variables:
-  PYTHON_VERSION: "3.8"
-
 deploy_preview:
   stage: deploy
   except:
-    - master
+    - main
   script:
-    - apt-get update -qy
-    - apt-get install -y python$PYTHON_VERSION python3-pip
     - npm install --global vercel
     - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
     - vercel build --token=$VERCEL_TOKEN
@@ -22,10 +14,8 @@ deploy_preview:
 deploy_production:
   stage: deploy
   only:
-    - master
+    - main
   script:
-    - apt-get update -qy
-    - apt-get install -y python$PYTHON_VERSION python3-pip
     - npm install --global vercel
     - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
     - vercel build --prod --token=$VERCEL_TOKEN
