@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeployTask</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+        .font-family-karla {
+            font-family: karla;
+        }
+    </style>
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</head>
+<body class="bg-white font-family-karla">
+    <br><br><br><br>
+
+    <!-- Body - Hello World -->
+    <div class="flex flex-col items-center py-12">
+      <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
+        Hello World!
+      </a>
+    </div>
+    <br><br>
+
+    <!-- Body - To Do list World -->
+    <div class="relative overflow-x-auto">
+        <p style="text-align:center"><b>Tasks</b></p><br>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      Task
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Status
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for tasks in task %}
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{tasks.desc}}
+                  </th>
+                  <td class="px-6 py-4">
+                      {{tasks.status}}
+                  </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+  </div>
+  <br><br>
+    <br><br>
+
+    <footer class="w-full border-t bg-white pb-12">
+      <div class="flex flex-col items-center py-12">
+        <p class="text-lg items-center text-black-600">Favian Naufal - 2006597802</p>
+        <p class="text-lg items-center text-gray-600">Deployment Task on 09.09.2023</p>
+      </div>
+    </footer>
+
+</body>
+</html>
