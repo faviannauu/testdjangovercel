@@ -5,7 +5,8 @@ stages:
 staging:test:
   stage: test
   image: python:3.9
-  only: staging
+  only: 
+    - staging
   script:
   - python -m venv venv
   - source venv/bin/activate
@@ -17,7 +18,8 @@ staging:test:
 production:test:
   stage: test
   image: python:3.9
-  only: master
+  only: 
+    - master
   script:
   - python -m venv venv
   - source venv/bin/activate
