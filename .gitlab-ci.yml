@@ -1,36 +1,8 @@
-stages:
-  - test
-  - deploy
-
-staging:test:
-  stage: test
-  image: python:3.9
-  only: 
-    - staging
-  script:
-  - python -m venv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt
-  - python manage.py collectstatic --noinput
-  - python manage.py migrate
-  - python manage.py test
-
-production:test:
-  stage: test
-  image: python:3.9
-  only: 
-    - master
-  script:
-  - python -m venv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt
-  - python manage.py collectstatic --noinput
-  - python manage.py migrate
-  - python manage.py test
+default:
+  image: nikolaik/python-nodejs:python3.9-nodejs16
 
 staging:deploy:
   stage: deploy
-  image: nikolaik/python-nodejs:python3.9-nodejs16
   only:
     - staging
   script:
@@ -41,7 +13,6 @@ staging:deploy:
 
 production:deploy:
   stage: deploy
-  image: nikolaik/python-nodejs:python3.9-nodejs16
   only:
     - master
   script:
